@@ -1,5 +1,4 @@
 #import "MyBasic";
-#import "MyBasic/MyName";
 #load "asset_path.jai";
 #load "asset_registry.jai";
 
@@ -27,7 +26,7 @@ Asset_Handle :: struct (T: Type) @CustomSerialize {
         return get_serialization_size(path.name);
     }
 
-    serialize :: (destination: BinaryView, value: Asset_Handle(T)) -> s64 {
+    serialize :: (destination: BlobView, value: Asset_Handle(T)) -> s64 {
         path, ok := asset_handle_path(global_asset_manager, value);
         if !ok {
             assert(false, "MyAssets error: invalid asset handle or missing serialization manager; substituting an empty asset path.\n");
@@ -37,7 +36,7 @@ Asset_Handle :: struct (T: Type) @CustomSerialize {
         return count;
     }
 
-    deserialize :: (source: BinaryView, value: *Asset_Handle(T)) -> s64 {
+    deserialize :: (source: BlobView, value: *Asset_Handle(T)) -> s64 {
         name: Name;
 
         count := deserialize_into(source, *name);

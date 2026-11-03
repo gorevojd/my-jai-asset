@@ -200,8 +200,6 @@ compare_asset_paths :: (a: Asset_Path, b: Asset_Path) -> int {
 
 #scope_file
 #import "Basic";
-#import "MyBasic";
-#import "MyBasic/MyName";
 String :: #import "String";
 #import "Unicode";
 
